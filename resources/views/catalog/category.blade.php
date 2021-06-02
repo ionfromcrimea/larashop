@@ -1,14 +1,13 @@
 @extends('layout.site')
 
 @section('content')
-<h1>Категория: {{ $category->name }}</h1>
-<ul>
-    @foreach ($products as $product)
-        <li>
-            <a href="{{ route('catalog.product', ['slug' => $product->slug]) }}">
-                {{ $product->name }}
-            </a>
-        </li>
-    @endforeach
-</ul>
+    <h1>{{ $category->name }}</h1>
+
+    <p>{{ $category->content }}</p>
+
+    <div class="row">
+        @foreach ($products as $product)
+            @include('catalog.part.product', ['product' => $product])
+        @endforeach
+    </div>
 @endsection
