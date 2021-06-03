@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
+Route::get('/error', function () {
+    return view('errors.404');
+});
+
 // маршрут для главной страницы без указания метода
 Route::get('/', 'IndexController')->name('index');
 
