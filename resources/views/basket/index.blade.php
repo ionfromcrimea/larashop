@@ -6,6 +6,13 @@
         @php
             $basketCost = 0;
         @endphp
+        <form action="{{ route('basket.clear') }}" method="post" class="text-right">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger mb-4 mt-0">
+                Очистить корзину
+            </button>
+        </form>
+
         <table class="table table-bordered">
             <tr>
                 <th>№</th>
@@ -28,11 +35,50 @@
                     </td>
                     <td>{{ number_format($itemPrice, 2, '.', '') }}</td>
                     <td>
-                        <i class="fas fa-minus-square"></i>
-                        <span class="mx-1">{{ $itemQuantity }}</span>
-                        <i class="fas fa-plus-square"></i>
+                        {{--                        <form action="{{ route('basket.minus', ['id' => $product->id]) }}"--}}
+                        {{--                              method="post" class="d-inline">--}}
+                        {{--                            @csrf--}}
+                        {{--                            <button type="submit" class="m-2 p-2 border-1 bg-transparent">--}}
+                        {{--                                <i class="fas fa-minus-square"></i>--}}
+                        {{--                            </button>--}}
+                        {{--                        </form>--}}
+                        <div class="btn-group form-inline">
+                            <form action="{{ route('basket.minus', ['id' => $product->id]) }}" method="POST">
+                                <button type="submit" class="btn btn-danger btn-sm" href=""><span
+                                        class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                @csrf
+                            </form>
+                            <span class="mx-1">{{ $itemQuantity }}</span>
+                            <form action="{{ route('basket.plus', ['id' => $product->id]) }}" method="POST">
+                                <button type="submit" class="btn btn-success btn-sm" href=""><span
+                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                @csrf
+                            </form>
+                            {{--                        <form action="{{ route('basket.plus', ['id' => $product->id]) }}"--}}
+                            {{--                              method="post" class="d-inline">--}}
+                            {{--                            @csrf--}}
+                            {{--                            <button type="submit" class="m-0 p-0 border-0 bg-transparent">--}}
+                            {{--                                <i class="fas fa-plus-square"></i>--}}
+                            {{--                            </button>--}}
+                            {{--                        </form>--}}
+                        </div>
+
                     </td>
                     <td>{{ number_format($itemCost, 2, '.', '') }}</td>
+                    <td>
+                        <form action="{{ route('basket.remove', ['id' => $product->id]) }}"
+                              method="post">
+                            @csrf
+{{--                            <button type="submit" class="m-0 p-0 border-0 bg-transparent">--}}
+{{--                                <i class="fas fa-trash-alt text-danger"></i>--}}
+{{--                            </button>--}}
+                            <button type="submit" class="btn btn-danger btn-sm" href=""><span
+                                    class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             <tr>

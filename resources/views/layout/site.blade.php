@@ -8,23 +8,25 @@
     <title>Магазин</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/font-glyphicons.css">
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <!-- Бренд и кнопка «Гамбургер» -->
-        <a class="navbar-brand" href="/">Магазин</a>
+        <a class="navbar-brand" href="{{ route('index') }}">Магазин</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbar-example" aria-controls="navbar-example"
+                data-target="#navbar-example" aria-controls="navbar-larashop"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Основная часть меню (может содержать ссылки, формы и прочее) -->
-        <div class="collapse navbar-collapse" id="navbar-example">
+        <div class="collapse navbar-collapse" id="navbar-larashop">
             <!-- Этот блок расположен слева -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Каталог</a>
+                    <a class="nav-link" href="{{ route('catalog.index') }}">Каталог</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Доставка</a>
@@ -33,16 +35,23 @@
                     <a class="nav-link" href="#">Контакты</a>
                 </li>
             </ul>
-            <!-- Этот блок расположен справа -->
+
+            <!-- Этот блок расположен посередине -->
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search"
                        placeholder="Поиск по каталогу" aria-label="Search">
                 <button class="btn btn-outline-info my-2 my-sm-0"
                         type="submit">Искать</button>
             </form>
+
+            <!-- Этот блок расположен справа -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('basket.index') }}">Корзина</a>
+                </li>
+            </ul>
         </div>
     </nav>
-
     <div class="row">
         <div class="col-md-3">
             <h4>Разделы каталога</h4>
