@@ -66,3 +66,4 @@ class Basket extends Model {
         $this->touch();
     }
 }
+
