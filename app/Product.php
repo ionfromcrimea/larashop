@@ -7,6 +7,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model {
+
     /**
      * Связь «товар принадлежит» таблицы `products` с таблицей `categories`
      */
@@ -20,6 +21,7 @@ class Product extends Model {
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
+
     /**
      * Связь «многие ко многим» таблицы `products` с таблицей `baskets`
      *
