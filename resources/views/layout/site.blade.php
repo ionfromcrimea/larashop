@@ -41,7 +41,8 @@
                 <input class="form-control mr-sm-2" type="search"
                        placeholder="Поиск по каталогу" aria-label="Search">
                 <button class="btn btn-outline-info my-2 my-sm-0"
-                        type="submit">Искать</button>
+                        type="submit">Искать
+                </button>
             </form>
 
             <!-- Этот блок расположен справа -->
@@ -54,10 +55,14 @@
     </nav>
     <div class="row">
         <div class="col-md-3">
-            <h4>Разделы каталога</h4>
-            <p>Здесь будут корневые разделы</p>
-            <h4>Популярные бренды</h4>
-            <p>Здесь будут популярные бренды</p>
+        @include('layout.part.roots')
+        @include('layout.part.brands')
+        <!--
+        <h4>Разделы каталога</h4>
+        <p>Здесь будут корневые разделы</p>
+        <h4>Популярные бренды</h4>
+        <p>Здесь будут популярные бренды</p>
+        -->
         </div>
         <div class="col-md-9">
             @yield('content')
