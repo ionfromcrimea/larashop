@@ -44,3 +44,25 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
     ->where('id', '[0-9]+')
     ->name('basket.remove');
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
+
+//Auth::routes();
+Route::name('user.')->prefix('user')->group(function () {
+    Route::get('index', 'UserController@index')->name('index');
+    Auth::routes();
+});
+Route::get('/home', 'HomeController@index')->name('home');
+
+// первый способ добавления посредников
+Route::namespace('Admin')->name('admin.')->prefix('admin')->middleware('auth', 'admin')->group(function () {
+    Route::get('index', 'IndexController')->name('index');
+});
+
+// второй способ добавления посредников
+//Route::group([
+//    'as' => 'admin.', // имя маршрута, например admin.index
+//    'prefix' => 'admin', // префикс маршрута, например admin/index
+//    'namespace' => 'Admin', // пространство имен контроллера
+//    'middleware' => ['auth', 'admin'] // один или несколько посредников
+//], function () {
+//    Route::get('index', 'IndexController')->name('index');
+//});
