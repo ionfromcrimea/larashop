@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Basket;
 use App\Brand;
 use App\Category;
 use Illuminate\Support\Facades\View;
@@ -28,6 +29,10 @@ class ComposerServiceProvider extends ServiceProvider {
         });
         View::composer('layout.part.brands', function($view) {
             $view->with(['items' => Brand::popular()]);
+        });
+        View::composer('layout.site', function($view) {
+//            $view->with(['positions' => Basket::getBasket()->products->count()]);
+            $view->with(['positions' => Basket::getCount()]);
         });
     }
 }
