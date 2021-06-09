@@ -2,9 +2,9 @@
 
 namespace App;
 
-namespace App;
-
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Cookie;
 
 class Basket extends Model {
 
@@ -65,6 +65,32 @@ class Basket extends Model {
         $this->products()->detach($id);
         // обновляем поле `updated_at` таблицы `baskets`
         $this->touch();
+    }
+
+    public static function getBasket() {
+        $basket_id = request()->cookie('basket_id');
+        if (!empty($basket_id)) {
+            try {
+                $basket = Basket::findOrFail($basket_id);
+            } catch (ModelNotFoundException $e) {
+                $basket = Basket::create();
+            }
+        } else {
+            $basket = Basket::create();
+        }
+        Cookie::queue('basket_id', $basket->id, 525600);
+        return $basket;
+    }
+
+    /**
+     * Возвращает количество позиций в корзине
+     */
+    public static function getCount() {
+        $basket_id = request()->cookie('basket_id');
+        if (empty($basket_id)) {
+            return 0;
+        }
+        return self::getBasket()->products->count();
     }
 }
 

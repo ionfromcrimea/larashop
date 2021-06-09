@@ -13,7 +13,8 @@ class BasketController extends Controller
     private $basket;
 
     public function __construct() {
-        $this->getBasket();
+//        $this->getBasket();
+        $this->basket = Basket::getBasket();
     }
 
     /**
@@ -70,19 +71,19 @@ class BasketController extends Controller
     /**
      * Возвращает объект корзины; если не найден — создает новый
      */
-    private function getBasket() {
-        $basket_id = request()->cookie('basket_id');
-        if (!empty($basket_id)) {
-            try {
-                $this->basket = Basket::findOrFail($basket_id);
-            } catch (ModelNotFoundException $e) {
-                $this->basket = Basket::create();
-            }
-        } else {
-            $this->basket = Basket::create();
-        }
-        Cookie::queue('basket_id', $this->basket->id, 525600);
-    }
+//    private function getBasket() {
+//        $basket_id = request()->cookie('basket_id');
+//        if (!empty($basket_id)) {
+//            try {
+//                $this->basket = Basket::findOrFail($basket_id);
+//            } catch (ModelNotFoundException $e) {
+//                $this->basket = Basket::create();
+//            }
+//        } else {
+//            $this->basket = Basket::create();
+//        }
+//        Cookie::queue('basket_id', $this->basket->id, 525600);
+//    }
 
     /**
      * Удаляет товар с идентификаторм $id из корзины
