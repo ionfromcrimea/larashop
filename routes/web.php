@@ -79,3 +79,15 @@ Route::group([
 
 Route::post('/basket/saveorder', 'BasketController@saveOrder')->name('basket.saveorder');
 Route::get('/basket/success/{basket_id}/{order_id}', 'BasketController@success')->name('basket.success');
+
+Route::group([
+    'as' => 'admin.', // имя маршрута, например admin.index
+    'prefix' => 'admin', // префикс маршрута, например admin/index
+    'namespace' => 'Admin', // пространство имен контроллера
+    'middleware' => ['auth', 'admin'] // один или несколько посредников
+], function () {
+    // главная страница панели управления
+    Route::get('index', 'IndexController')->name('index');
+    // CRUD-операции над категориями каталога
+    Route::resource('category', 'CategoryController');
+});
