@@ -76,3 +76,6 @@ Route::group([
 //Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
 //    Route::get('index', 'IndexController')->name('index');
 //});
+
+Route::post('/basket/saveorder', 'BasketController@saveOrder')->name('basket.saveorder');
+Route::get('/basket/success/{basket_id}/{order_id}', 'BasketController@success')->name('basket.success');

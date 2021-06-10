@@ -92,5 +92,13 @@ class Basket extends Model {
         }
         return self::getBasket()->products->count();
     }
+
+    public function getAmount() {
+        $amount = 0.0;
+        foreach ($this->products as $product) {
+            $amount = $amount + $product->price * $product->pivot->quantity;
+        }
+        return $amount;
+    }
 }
 
