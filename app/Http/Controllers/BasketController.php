@@ -17,6 +17,7 @@ class BasketController extends Controller
     public function __construct()
     {
 //        $this->getBasket();
+//        dd('123');
         $this->basket = Basket::getBasket();
     }
 

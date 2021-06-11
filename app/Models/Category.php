@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model {
 
+    protected $fillable = [
+        'parent_id',
+        'name',
+        'slug',
+        'content',
+        'image',
+    ];
+
     /**
      * Связь «один ко многим» таблицы `categories` с таблицей `products`
      */

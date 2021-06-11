@@ -11,4 +11,9 @@
         </tr>
         @include('admin.category.part.tree', ['items' => $roots, 'level' => -1])
     </table>
+    <div>
+        <a href="{{ route('admin.category.create') }}"
+           class="btn btn-dark">Новый раздел</a>
+    </div>
+
 @endsection
