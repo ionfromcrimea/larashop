@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,28 +36,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    /**
-     * Сразу после входа выполняем редирект и устанавливаем flash-сообщение
-     */
-    protected function authenticated(Request $request, $user) {
-        $route = 'user.index';
-        $message = 'Вы успешно вошли в личный кабинет';
-//        dd($user->admin);
-        if ($user->admin) {
-            $route = 'admin.index';
-            $message = 'Вы успешно вошли в панель управления';
-        }
-        return redirect()->route($route)
-            ->with('success', $message);
-    }
-
-    /**
-     * Сразу после выхода выполняем редирект и устанавливаем flash-сообщение
-     */
-    protected function loggedOut(Request $request) {
-        return redirect()->route('user.login')
-            ->with('success', 'Вы успешно вышли из личного кабинета');
     }
 }

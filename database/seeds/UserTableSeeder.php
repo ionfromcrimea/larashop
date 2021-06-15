@@ -1,9 +1,10 @@
 <?php
 use Illuminate\Database\Seeder;
+use App\Models\Brand;
 
 class UserTableSeeder extends Seeder {
     public function run() {
         // создать 5 юзеров
-        factory(App\User::class, 5)->create();
+        factory(App\Models\User::class, 5)->create();
     }
 }

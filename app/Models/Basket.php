@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Cookie;
 
+/**
+ * App\Models\Basket
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Basket newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Basket newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Basket query()
+ * @mixin \Eloquent
+ */
 class Basket extends Model {
 
     /**

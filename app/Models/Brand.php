@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Brand
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Brand newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Brand newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Brand query()
+ * @mixin \Eloquent
+ */
 class Brand extends Model {
 
     /**

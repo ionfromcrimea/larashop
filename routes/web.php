@@ -91,3 +91,7 @@ Route::group([
     // CRUD-операции над категориями каталога
     Route::resource('category', 'CategoryController');
 });
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

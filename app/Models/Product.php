@@ -4,6 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Product
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Basket[] $baskets
+ * @property-read int|null $baskets_count
+ * @property-read \App\Models\Brand $brand
+ * @property-read \App\Models\Category $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @mixin \Eloquent
+ */
 class Product extends Model {
 
     /**

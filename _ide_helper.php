@@ -10009,9 +10009,6 @@
                     /**
          * 
          *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
-         * @param array $rules
-         * @param mixed $params
          * @static 
          */ 
         public static function validate($rules, ...$params)
@@ -10021,10 +10018,6 @@
                     /**
          * 
          *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
-         * @param string $errorBag
-         * @param array $rules
-         * @param mixed $params
          * @static 
          */ 
         public static function validateWithBag($errorBag, $rules, ...$params)
@@ -10034,8 +10027,6 @@
                     /**
          * 
          *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
-         * @param mixed $absolute
          * @static 
          */ 
         public static function hasValidSignature($absolute = true)
@@ -11144,8 +11135,6 @@
                     /**
          * 
          *
-         * @see \Laravel\Ui\AuthRouteMethods::auth()
-         * @param mixed $options
          * @static 
          */ 
         public static function auth($options)
@@ -11155,7 +11144,6 @@
                     /**
          * 
          *
-         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
          * @static 
          */ 
         public static function resetPassword()
@@ -11165,7 +11153,6 @@
                     /**
          * 
          *
-         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
          * @static 
          */ 
         public static function confirmPassword()
@@ -11175,7 +11162,6 @@
                     /**
          * 
          *
-         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
          * @static 
          */ 
         public static function emailVerification()
@@ -14130,23 +14116,6 @@
         class Str {
          
     }
-            /**
-     * 
-     *
-     */ 
-        class Collection {
-                    /**
-         * 
-         *
-         * @see \Barryvdh\Debugbar\ServiceProvider::register()
-         * @static 
-         */ 
-        public static function debug()
-        {
-                        return \Illuminate\Support\Collection::debug();
-        }
-         
-    }
      
 }
 
@@ -14973,106 +14942,6 @@
         {
                         /** @var \Facade\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
-        }
-         
-    }
-     
-}
-
-    namespace Illuminate\Http { 
-            /**
-     * 
-     *
-     */ 
-        class Request {
-                    /**
-         * 
-         *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
-         * @param array $rules
-         * @param mixed $params
-         * @static 
-         */ 
-        public static function validate($rules, ...$params)
-        {
-                        return \Illuminate\Http\Request::validate($rules, ...$params);
-        }
-                    /**
-         * 
-         *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
-         * @param string $errorBag
-         * @param array $rules
-         * @param mixed $params
-         * @static 
-         */ 
-        public static function validateWithBag($errorBag, $rules, ...$params)
-        {
-                        return \Illuminate\Http\Request::validateWithBag($errorBag, $rules, ...$params);
-        }
-                    /**
-         * 
-         *
-         * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
-         * @param mixed $absolute
-         * @static 
-         */ 
-        public static function hasValidSignature($absolute = true)
-        {
-                        return \Illuminate\Http\Request::hasValidSignature($absolute);
-        }
-         
-    }
-     
-}
-
-    namespace Illuminate\Routing { 
-            /**
-     * 
-     *
-     * @mixin \Illuminate\Routing\RouteRegistrar
-     */ 
-        class Router {
-                    /**
-         * 
-         *
-         * @see \Laravel\Ui\AuthRouteMethods::auth()
-         * @param mixed $options
-         * @static 
-         */ 
-        public static function auth($options)
-        {
-                        return \Illuminate\Routing\Router::auth($options);
-        }
-                    /**
-         * 
-         *
-         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
-         * @static 
-         */ 
-        public static function resetPassword()
-        {
-                        return \Illuminate\Routing\Router::resetPassword();
-        }
-                    /**
-         * 
-         *
-         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
-         * @static 
-         */ 
-        public static function confirmPassword()
-        {
-                        return \Illuminate\Routing\Router::confirmPassword();
-        }
-                    /**
-         * 
-         *
-         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
-         * @static 
-         */ 
-        public static function emailVerification()
-        {
-                        return \Illuminate\Routing\Router::emailVerification();
         }
          
     }
