@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -37,17 +38,27 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // проверяем данные формы создания категории
+    public function store(Request $request) {
+        /*
+         * Проверяем данные формы создания категории
+         */
         $this->validate($request, [
             'parent_id' => 'integer',
             'name' => 'required|max:100',
-            'slug' => 'required|max:100|unique:categories,slug|alpha_dash',
+            'slug' => 'required|max:100|unique:categories,slug|regex:~^[-_a-z0-9]+$~i',
             'image' => 'mimes:jpeg,jpg,png|max:5000'
         ]);
-        // проверка пройдена, сохраняем категорию
-        $category = Category::create($request->all());
+        /*
+         * Проверка пройдена, создаем категорию
+         */
+        $file = $request->file('image');
+        if ($file) { // был загружен файл изображения
+            $path = $file->store('catalog/category/source', 'public');
+            $base = basename($path);
+        }
+        $data = $request->all();
+        $data['image'] = $base ?? null;
+        $category = Category::create($data);
         return redirect()
             ->route('admin.category.show', ['category' => $category->id])
             ->with('success', 'Новая категория успешно создана');
@@ -84,27 +95,51 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
-    {
-        // проверяем данные формы редактирования категории
+    public function update(Request $request, Category $category) {
+        /*
+         * Проверяем данные формы редактирования категории
+         */
+//        dd($request);
         $id = $category->id;
         $this->validate($request, [
             'parent_id' => 'integer',
             'name' => 'required|max:100',
             /*
              * Проверка на уникальность slug, исключая эту категорию по идентифкатору:
-             * 1. categories — таблица базы данных, где проверяется уникальность
+             * 1. categories — таблица базы данных, где пороверяется уникальность
              * 2. slug — имя колонки, уникальность значения которой проверяется
              * 3. значение, по которому из проверки исключается запись таблицы БД
              * 4. поле, по которому из проверки исключается запись таблицы БД
              * Для проверки будет использован такой SQL-запрос к базе данныхЖ
              * SELECT COUNT(*) FROM `categories` WHERE `slug` = '...' AND `id` <> 17
              */
-            'slug' => 'required|max:100|unique:categories,slug,'.$id.',id|alpha_dash',
+            'slug' => 'required|max:100|unique:categories,slug,'.$id.',id|regex:~^[-_a-z0-9]+$~i',
             'image' => 'mimes:jpeg,jpg,png|max:5000'
         ]);
-        // проверка пройдена, обновляем категорию
-        $category->update($request->all());
+        /*
+         * Проверка пройдена, обновляем категорию
+         */
+        if ($request->remove) { // если надо удалить изображение
+            $old = $category->image;
+            if ($old) {
+                Storage::disk('public')->delete('catalog/category/source/' . $old);
+            }
+            $file = null;
+        }
+        else $file = $request->file('image');
+//        dd($file);
+        if ($file) { // был загружен файл изображения (или имелся перед редактированием)
+            $path = $file->store('catalog/category/source', 'public');
+            $base = basename($path);
+            // удаляем старый файл изображения
+            $old = $category->image;
+            if ($old) {
+                Storage::disk('public')->delete('catalog/category/source/' . $old);
+            }
+        }
+        $data = $request->all();
+        $data['image'] = $base ?? null;
+        $category->update($data);
         return redirect()
             ->route('admin.category.show', ['category' => $category->id])
             ->with('success', 'Категория была успешно исправлена');
