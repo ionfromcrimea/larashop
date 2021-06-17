@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ImageSaver;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CategoryCatalogRequest;
 
 class CategoryController extends Controller
 {
+    private $imageSaver;
+
+    public function __construct(ImageSaver $imageSaver)
+    {
+        $this->imageSaver = $imageSaver;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,29 +44,30 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CategoryCatalogRequest $request)
+    {
         /*
          * Проверяем данные формы создания категории
          */
-        $this->validate($request, [
-            'parent_id' => 'integer',
-            'name' => 'required|max:100',
-            'slug' => 'required|max:100|unique:categories,slug|regex:~^[-_a-z0-9]+$~i',
-            'image' => 'mimes:jpeg,jpg,png|max:5000'
-        ]);
+//        $this->validate($request, [
+//            'parent_id' => 'integer',
+//            'name' => 'required|max:100',
+//            'slug' => 'required|max:100|unique:categories,slug|regex:~^[-_a-z0-9]+$~i',
+//            'image' => 'mimes:jpeg,jpg,png|max:5000'
+//        ]);
         /*
          * Проверка пройдена, создаем категорию
          */
-        $file = $request->file('image');
-        if ($file) { // был загружен файл изображения
-            $path = $file->store('catalog/category/source', 'public');
-            $base = basename($path);
-        }
+//        $file = $request->file('image');
+//        if ($file) { // был загружен файл изображения
+//            $path = $file->store('catalog/category/source', 'public');
+//            $base = basename($path);
+//        }
         $data = $request->all();
-        $data['image'] = $base ?? null;
+        $data['image'] = $this->imageSaver->upload($request, null, 'category');
         $category = Category::create($data);
         return redirect()
             ->route('admin.category.show', ['category' => $category->id])
@@ -67,7 +77,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show(Category $category)
@@ -78,7 +88,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit(Category $category)
@@ -91,19 +101,20 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category) {
+    public function update(CategoryCatalogRequest $request, Category $category)
+    {
         /*
          * Проверяем данные формы редактирования категории
          */
 //        dd($request);
-        $id = $category->id;
-        $this->validate($request, [
-            'parent_id' => 'integer',
-            'name' => 'required|max:100',
+//        $id = $category->id;
+//        $this->validate($request, [
+//            'parent_id' => 'integer',
+//            'name' => 'required|max:100',
             /*
              * Проверка на уникальность slug, исключая эту категорию по идентифкатору:
              * 1. categories — таблица базы данных, где пороверяется уникальность
@@ -113,32 +124,31 @@ class CategoryController extends Controller
              * Для проверки будет использован такой SQL-запрос к базе данныхЖ
              * SELECT COUNT(*) FROM `categories` WHERE `slug` = '...' AND `id` <> 17
              */
-            'slug' => 'required|max:100|unique:categories,slug,'.$id.',id|regex:~^[-_a-z0-9]+$~i',
-            'image' => 'mimes:jpeg,jpg,png|max:5000'
-        ]);
+//            'slug' => 'required|max:100|unique:categories,slug,' . $id . ',id|regex:~^[-_a-z0-9]+$~i',
+//            'image' => 'mimes:jpeg,jpg,png|max:5000'
+//        ]);
         /*
          * Проверка пройдена, обновляем категорию
          */
-        if ($request->remove) { // если надо удалить изображение
-            $old = $category->image;
-            if ($old) {
-                Storage::disk('public')->delete('catalog/category/source/' . $old);
-            }
-            $file = null;
-        }
-        else $file = $request->file('image');
-//        dd($file);
-        if ($file) { // был загружен файл изображения (или имелся перед редактированием)
-            $path = $file->store('catalog/category/source', 'public');
-            $base = basename($path);
-            // удаляем старый файл изображения
-            $old = $category->image;
-            if ($old) {
-                Storage::disk('public')->delete('catalog/category/source/' . $old);
-            }
-        }
+//        if ($request->remove) { // если надо удалить изображение
+//            $old = $category->image;
+//            if ($old) {
+//                Storage::disk('public')->delete('catalog/category/source/' . $old);
+//            }
+//            $file = null;
+//        } else $file = $request->file('image');
+////        dd($file);
+//        if ($file) { // был загружен файл изображения (или имелся перед редактированием)
+//            $path = $file->store('catalog/category/source', 'public');
+//            $base = basename($path);
+//            // удаляем старый файл изображения
+//            $old = $category->image;
+//            if ($old) {
+//                Storage::disk('public')->delete('catalog/category/source/' . $old);
+//            }
+//        }
         $data = $request->all();
-        $data['image'] = $base ?? null;
+        $data['image'] = $this->imageSaver->upload($request, $category, 'category');
         $category->update($data);
         return redirect()
             ->route('admin.category.show', ['category' => $category->id])
@@ -148,7 +158,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Category $category)

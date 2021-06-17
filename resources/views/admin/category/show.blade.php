@@ -14,50 +14,44 @@
             @endisset
         </div>
         <div class="col-md-6">
-            <img src="https://via.placeholder.com/600x200" alt="" class="img-fluid">
+            @php
+                if ($category->image) {
+                    // $url = url('storage/catalog/category/image/' . $category->image);
+                    $url = Storage::url('catalog/category/image/' . $category->image);
+                } else {
+                    // $url = url('storage/catalog/category/image/default.jpg');
+                    $url = Storage::url('catalog/category/image/default.jpg');
+                }
+            @endphp
+            {{--            <div class="card-header">--}}
+            {{--                <p>Картинка:</p>--}}
+            {{--            </div>--}}
+            {{--            <div class="card-body">--}}
+            {{--            <img src="{{ asset('storage/catalog/category/thumb/4nQNOmMr6WHVZjsbIlgxrUnNPJpevNgTIfUjJeDM.jpg') }}" alt="" class="img-fluid">--}}
+            <img src="{{ asset($url) }}" alt="" class="img-fluid">
         </div>
+        {{--    </div>--}}
     </div>
     @if ($category->children->count())
-        <p><strong>Дочерние категории</strong></p>
+        <p><strong>Дочерние категории:</strong></p>
+        <!-- Здесь таблица дочерних категорий -->
         <table class="table table-bordered">
             <tr>
-                <th>№</th>
-                <th width="45%">Наименование</th>
-                <th width="45%">ЧПУ (англ)</th>
+                <th width="30%">Наименование</th>
+                <th width="65%">Описание</th>
                 <th><i class="fas fa-edit"></i></th>
                 <th><i class="fas fa-trash-alt"></i></th>
             </tr>
-            @foreach ($category->children as $child)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>
-                        <a href="{{ route('admin.category.show', ['category' => $child->id]) }}">
-                            {{ $child->name }}
-                        </a>
-                    </td>
-                    <td>{{ $child->slug }}</td>
-                    <td>
-                        <a href="{{ route('admin.category.edit', ['category' => $child->id]) }}">
-                            <i class="far fa-edit"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="{{ route('admin.category.destroy', ['category' => $child->id]) }}"
-                              method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="m-0 p-0 border-0 bg-transparent">
-                                <i class="far fa-trash-alt text-danger"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+            @include('admin.category.part.tree', ['items' => $category->children, 'level' => 0])
         </table>
     @else
-        <p>Нет дочерних категорий</p>
+        <p><strong>Нет дочерних категорий</strong></p>
     @endif
-    <form method="post"
+    <a href="{{ route('admin.category.edit', ['category' => $category->id]) }}"
+       class="btn btn-success">
+        Редактировать категорию
+    </a>
+    <form method="post" class="d-inline"
           action="{{ route('admin.category.destroy', ['category' => $category->id]) }}">
         @csrf
         @method('DELETE')

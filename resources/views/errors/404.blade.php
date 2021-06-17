@@ -9,6 +9,7 @@
                 </div>
                 <div class="card-body">
                     <img src="{{ asset('img/png404-2.png') }}" alt="" class="img-fluid">
+{{--                    <img src="{{ asset('storage/catalog/category/image/4nQNOmMr6WHVZjsbIlgxrUnNPJpevNgTIfUjJeDM.jpg ') }}" alt="" class="img-fluid">--}}
                 </div>
                 <div class="card-footer">
                     <p>Запрошенная страница не найдена.</p>
