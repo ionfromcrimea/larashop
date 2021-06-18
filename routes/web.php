@@ -90,6 +90,8 @@ Route::group([
     Route::get('index', 'IndexController')->name('index');
     // CRUD-операции над категориями каталога
     Route::resource('category', 'CategoryController');
+    // CRUD-операции над брендами каталога
+    Route::resource('brand', 'BrandController');
 });
 
 //Auth::routes();

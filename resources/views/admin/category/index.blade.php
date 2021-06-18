@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin', ['title' => 'Все категории каталога'])
 
 @section('content')
     <h1>Все категории</h1>
@@ -13,7 +13,7 @@
     </table>
     <div>
         <a href="{{ route('admin.category.create') }}"
-           class="btn btn-dark">Новый раздел</a>
+           class="btn btn-dark">Новая категория</a>
     </div>
 
 @endsection
