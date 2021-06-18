@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Brand
  *
@@ -15,6 +16,13 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Brand extends Model {
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'content',
+        'image',
+    ];
 
     /**
      * Связь «один ко многим» таблицы `brands` с таблицей `products`
