@@ -17,7 +17,7 @@
             @php
                 if ($brand->image) {
                     // $url = url('storage/catalog/brand/source/' . $brand->image);
-                    $url = Storage::disk('public')->url('catalog/brand/image/' . $brand->image);
+                    $url = Storage::url('catalog/brand/image/' . $brand->image);
                 } else {
                     // $url = Storage::disk('public')->url('catalog/brand/image/' . $brand->image);
                     $url = Storage::disk('public')->url('catalog/brand/image/default.jpg');

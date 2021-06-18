@@ -1,8 +1,7 @@
 @if (count($items))
-    @php
-        $level++;
-    @endphp
-    @foreach ($items as $item)
+    @php $level++; @endphp
+    {{--    @foreach ($items as $item)--}}
+    @foreach ($items->where('parent_id', $parent) as $item)
         <tr>
             <td>
                 @if ($level)
@@ -30,8 +29,12 @@
                 </form>
             </td>
         </tr>
-        @if ($item->children->count())
-            @include('admin.category.part.tree', ['items' => $item->children, 'level' => $level])
+{{--        @php dd($item, $item->children, $item->children->count()); @endphp--}}
+                @if ($item->children->count())
+        {{--            @include('admin.category.part.tree', ['items' => $item->children, 'level' => $level])--}}
+        {{--        @endif--}}
+{{--        @if (count($items->where('parent_id', $parent)))--}}
+            @include('admin.category.part.tree', ['items' => $item->children, 'level' => $level, 'parent' => $item->id])
         @endif
     @endforeach
 @endif

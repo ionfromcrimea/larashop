@@ -42,7 +42,8 @@
                 <th><i class="fas fa-edit"></i></th>
                 <th><i class="fas fa-trash-alt"></i></th>
             </tr>
-            @include('admin.category.part.tree', ['items' => $category->children, 'level' => 0])
+            @include('admin.category.part.tree', ['items' => $category->children, 'level' => 0, 'parent' => $category->id])
+{{--            @include('admin.category.part.branch', ['level' => 1, 'parent' => $category->id])--}}
         </table>
     @else
         <p><strong>Нет дочерних категорий</strong></p>

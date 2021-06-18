@@ -78,4 +78,18 @@ class Category extends Model {
         return $ids;
     }
 
+    /**
+     * Связь «один ко многим» таблицы `categories` с таблицей `categories`, но
+     * позволяет получить не только дочерние категории, но и дочерние-дочерние
+     */
+    public function descendants() {
+        return $this->hasMany(Category::class, 'parent_id')->with('descendants');
+    }
+
+    /**
+     * Возвращает список всех категорий каталога в виде дерева
+     */
+    public static function hierarchy() {
+        return self::where('parent_id', 0)->with('descendants')->get();
+    }
 }
