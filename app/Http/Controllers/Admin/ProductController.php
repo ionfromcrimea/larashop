@@ -90,6 +90,7 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductCatalogRequest $request, Product $product) {
+//        dd($request);
         $data = $request->all();
         $data['image'] = $this->imageSaver->upload($request, $product, 'product');
         $product->update($data);
