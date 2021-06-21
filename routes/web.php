@@ -92,6 +92,10 @@ Route::group([
     Route::resource('category', 'CategoryController');
     // CRUD-операции над брендами каталога
     Route::resource('brand', 'BrandController');
+    // CRUD-операции над товарами каталога
+    Route::resource('product', 'ProductController');
+    Route::get('product/category/{category}', 'ProductController@category')
+        ->name('product.category');
 });
 
 //Auth::routes();
