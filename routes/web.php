@@ -104,6 +104,8 @@ Route::group([
     Route::resource('user', 'UserController', ['except' => [
         'create', 'store', 'show', 'destroy'
     ]]);
+    // CRUD-операции над страницами сайта
+    Route::resource('page', 'PageController');
 });
 
 //Auth::routes();
