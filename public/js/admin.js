@@ -21,4 +21,12 @@ jQuery(document).ready(function($) {
         text = text.replace(/-+/g, '-');
         $('input[name="slug"]').val(text);
     });
+
+    /*
+     * Подключение wysiwyg-редактора для редактирования контента страницы
+     */
+    $('textarea[id="editor"]').summernote({
+        lang: 'ru-RU',
+        height: 300,
+    });
 });

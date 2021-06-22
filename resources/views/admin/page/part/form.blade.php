@@ -22,7 +22,7 @@
 </div>
 <div class="form-group">
     <textarea class="form-control" name="content" placeholder="Контент (html)" required
-              rows="10">{{ old('content') ?? $page->content ?? '' }}</textarea>
+              id="editor" rows="10">{{ old('content') ?? $page->content ?? '' }}</textarea>
 </div>
 <div class="form-group">
     <button type="submit" class="btn btn-primary">Сохранить</button>
