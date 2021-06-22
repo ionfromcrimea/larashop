@@ -96,6 +96,10 @@ Route::group([
     Route::resource('product', 'ProductController');
     Route::get('product/category/{category}', 'ProductController@category')
         ->name('product.category');
+    // просмотр и редактирование заказов
+    Route::resource('order', 'OrderController', ['except' => [
+        'create', 'store', 'destroy'
+    ]]);
 });
 
 //Auth::routes();

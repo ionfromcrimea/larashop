@@ -103,7 +103,7 @@ class CategoryController extends Controller
 //        return view('admin.category.edit', compact('category', 'parents'));
         // все категории для возможности выбора родителя
         $items = Category::all();
-        return view('admin.category.edit', compact('items', 'category'));
+        return view('admin.category.edit', compact('category', 'items'));
     }
 
     /**
