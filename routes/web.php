@@ -100,6 +100,10 @@ Route::group([
     Route::resource('order', 'OrderController', ['except' => [
         'create', 'store', 'destroy'
     ]]);
+    // просмотр и редактирование пользователей
+    Route::resource('user', 'UserController', ['except' => [
+        'create', 'store', 'show', 'destroy'
+    ]]);
 });
 
 //Auth::routes();
