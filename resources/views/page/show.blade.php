@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layout.site', ['title' => $page->name])
 
 @section('content')
     <div class="card">

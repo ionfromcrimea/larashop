@@ -5,7 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Магазин</title>
+{{--    <title>Магазин</title>--}}
+    <title>{{ $title ?? 'Интернет-магазин' }}</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
     <script src="{{ asset('/js/app.js') }}"></script>
@@ -30,16 +31,34 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('catalog.index') }}">Каталог</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Доставка</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Контакты</a>
-                </li>
+                @include('layout.part.pages')
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="#">Доставка</a>--}}
+{{--                </li>--}}
+
+                {{--                <li class="nav-item dropdown">--}}
+                {{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"--}}
+                {{--                       role="button" data-toggle="dropdown" aria-haspopup="true"--}}
+                {{--                       aria-expanded="false">--}}
+                {{--                        Оплата (dropdown)--}}
+                {{--                    </a>--}}
+                {{--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                {{--                        <a class="dropdown-item" href="#">Оплата (navlink)</a>--}}
+                {{--                        <div class="dropdown-divider"></div>--}}
+                {{--                        <a class="dropdown-item" href="#">Первая дочерняя (оплата)</a>--}}
+                {{--                        <a class="dropdown-item" href="#">Вторая дочерняя (оплата)</a>--}}
+                {{--                    </div>--}}
+                {{--                </li>--}}
+
+
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link" href="{{ route('page.show', ['Kontakty']) }}">Контакты</a>--}}
+                {{--                    <a class="nav-link" href="#">Контакты</a>--}}
+                {{--                </li>--}}
             </ul>
 
             <!-- Этот блок расположен посередине -->
-            <form class="form-inline my-2 my-lg-0">
+            <form class=" form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search"
                        placeholder="Поиск по каталогу" aria-label="Search">
                 <button class="btn btn-outline-info my-2 my-sm-0"
