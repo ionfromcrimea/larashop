@@ -106,6 +106,11 @@ Route::group([
     ]]);
     // CRUD-операции над страницами сайта
     Route::resource('page', 'PageController');
+    Route::post('page/upload/image', 'PageController@uploadImage')
+        ->name('page.upload.image');
+    // удаление изображения в редакторе
+    Route::delete('page/remove/image', 'PageController@removeImage')
+        ->name('page.remove.image');
 });
 
 //Auth::routes();
