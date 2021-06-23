@@ -113,6 +113,8 @@ Route::group([
         ->name('page.remove.image');
 });
 
-//Auth::routes();
+//Route::get('page/{page}', 'PageController')->name('page.show');
+Route::get('/page/{page:slug}', 'PageController')->name('page.show');
 
+//Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
