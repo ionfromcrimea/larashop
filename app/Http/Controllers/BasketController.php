@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\Order;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -38,13 +39,15 @@ class BasketController extends Controller
     /**
      * Форма оформления заказа
      */
-    public function checkout()
+    public function checkout(Request $request)
     {
         if (Basket::getCount() == 0) {
 //            dd(Basket::getCount());
             return redirect()->route('basket.index')->with('success', 'Ваша корзина пуста');
         }
-        return view('basket.checkout');
+        $profiles = auth()->user()->profiles()->paginate(4);
+        $currentProfile = $request->profile_id ? Profile::findOrFail($request->profile_id) : null;
+        return view('basket.checkout', compact('profiles', 'currentProfile'));
     }
 
     /**
