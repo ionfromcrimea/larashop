@@ -8,7 +8,10 @@
 {{--    <title>Магазин</title>--}}
     <title>{{ $title ?? 'Интернет-магазин' }}</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+          crossorigin="anonymous"/>
+{{--    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">--}}
     <script src="{{ asset('/js/app.js') }}"></script>
     <script src="{{ asset('/js/cite.js') }}"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
