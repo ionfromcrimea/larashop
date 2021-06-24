@@ -14,7 +14,13 @@ class CatalogController extends Controller {
 
     public function category(Category $category) {
 //        $category = Category::where('slug', $slug)->firstOrFail();
-        return view('catalog.category', compact('category'));
+//        return view('catalog.category', compact('category'));
+        // получаем всех потомков этой категории
+        $descendants = $category->getAllChildren($category->id);
+        $descendants[] = $category->id;
+        // товары этой категории и всех потомков
+        $products = Product::whereIn('category_id', $descendants)->paginate(6);
+        return view('catalog.category', compact('category', 'products'));
     }
 
     public function brand(Brand $brand) {
