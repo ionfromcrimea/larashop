@@ -12,18 +12,18 @@ class CatalogController extends Controller {
         return view('catalog.index', compact('roots'));
     }
 
-    public function category($slug) {
-        $category = Category::where('slug', $slug)->firstOrFail();
+    public function category(Category $category) {
+//        $category = Category::where('slug', $slug)->firstOrFail();
         return view('catalog.category', compact('category'));
     }
 
-    public function brand($slug) {
-        $brand = Brand::where('slug', $slug)->firstOrFail();
+    public function brand(Brand $brand) {
+//        $brand = Brand::where('slug', $slug)->firstOrFail();
         return view('catalog.brand', compact('brand'));
     }
 
-    public function product($slug) {
-        $product = Product::where('slug', $slug)->firstOrFail();
+    public function product(Product $product) {
+//        $product = Product::where('slug', $slug)->firstOrFail();
         return view('catalog.product', compact('product'));
     }
 }
