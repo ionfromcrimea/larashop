@@ -59,6 +59,10 @@ Route::group([
     Route::get('index', 'UserController@index')->name('index');
     // CRUD-операции над профилями пользователя
     Route::resource('profile', 'ProfileController');
+    // просмотр списка заказов в личном кабинете
+    Route::get('order', 'OrderController@index')->name('order.index');
+    // просмотр отдельного заказа в личном кабинете
+    Route::get('order/{order}', 'OrderController@show')->name('order.show');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
