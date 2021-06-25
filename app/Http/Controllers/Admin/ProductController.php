@@ -50,6 +50,11 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProductCatalogRequest $request) {
+        $request->merge([
+            'new' => $request->has('new'),
+            'hit' => $request->has('hit'),
+            'sale' => $request->has('sale'),
+        ]);
         $data = $request->all();
         $data['image'] = $this->imageSaver->upload($request, null, 'product');
         $product = Product::create($data);
@@ -91,6 +96,11 @@ class ProductController extends Controller {
      */
     public function update(ProductCatalogRequest $request, Product $product) {
 //        dd($request);
+        $request->merge([
+            'new' => $request->has('new'),
+            'hit' => $request->has('hit'),
+            'sale' => $request->has('sale'),
+        ]);
         $data = $request->all();
         $data['image'] = $this->imageSaver->upload($request, $product, 'product');
         $product->update($data);

@@ -26,6 +26,9 @@ class Product extends Model {
         'price',
         'content',
         'image',
+        'new',
+        'hit',
+        'sale',
     ];
 
     /**
