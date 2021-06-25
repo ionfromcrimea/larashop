@@ -30,7 +30,9 @@ class CatalogController extends Controller {
 
     public function brand(Brand $brand) {
 //        $brand = Brand::where('slug', $slug)->firstOrFail();
-        return view('catalog.brand', compact('brand'));
+//        return view('catalog.brand', compact('brand'));
+        $products = $brand->products()->paginate(6);
+        return view('catalog.brand', compact('brand', 'products'));
     }
 
     public function product(Product $product) {
