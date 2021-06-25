@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller {
     public function index() {
+//        $roots = Category::where('parent_id', 0)->get();
+//        return view('catalog.index', compact('roots'));
+        // корневые категории
         $roots = Category::where('parent_id', 0)->get();
-        return view('catalog.index', compact('roots'));
+        // популярные бренды
+        $brands = Brand::popular();
+        return view('catalog.index', compact('roots', 'brands'));
     }
 
     public function category(Category $category) {
