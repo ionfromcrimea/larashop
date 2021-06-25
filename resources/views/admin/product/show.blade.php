@@ -8,6 +8,7 @@
             <p><strong>ЧПУ (англ):</strong> {{ $product->slug }}</p>
             <p><strong>Бренд:</strong> {{ $product->brand->name }}</p>
             <p><strong>Категория:</strong> {{ $product->category->name }}</p>
+            <p><strong>Цена:</strong> {{ $product->price }}</p>
 
         </div>
         <div class="col-md-6">

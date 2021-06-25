@@ -23,6 +23,7 @@ class Product extends Model {
         'brand_id',
         'name',
         'slug',
+        'price',
         'content',
         'image',
     ];
