@@ -13,6 +13,7 @@ class BasketController extends Controller
 {
 
     private $basket;
+
 //    public static $order;
 
     public function __construct()
@@ -45,7 +46,11 @@ class BasketController extends Controller
 //            dd(Basket::getCount());
             return redirect()->route('basket.index')->with('success', 'Ваша корзина пуста');
         }
-        $profiles = auth()->user()->profiles()->paginate(4);
+        if (auth()->user()) {
+            $profiles = auth()->user()->profiles()->paginate(4);
+        } else {
+            $profiles = null;
+        }
         $currentProfile = $request->profile_id ? Profile::findOrFail($request->profile_id) : null;
         return view('basket.checkout', compact('profiles', 'currentProfile'));
     }
