@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\ProductFilter;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -18,7 +19,7 @@ class CatalogController extends Controller {
     }
 
 //    public function category(Category $category)
-    public function category(Request $request, Category $category) {
+    public function category_old(Request $request, Category $category) {
 
 //        $category = Category::where('slug', $slug)->firstOrFail();
 //        return view('catalog.category', compact('category'));
@@ -91,5 +92,15 @@ class CatalogController extends Controller {
     public function product(Product $product) {
 //        $product = Product::where('slug', $slug)->firstOrFail();
         return view('catalog.product', compact('product'));
+    }
+
+    public function category(Request $request, Category $category) {
+        $descendants = $category->getAllChildren($category->id);
+        $descendants[] = $category->id;
+        $builder = Product::whereIn('category_id', $descendants);
+
+        $products = (new ProductFilter($builder, $request))->apply()->paginate(6)->withQueryString();
+
+        return view('catalog.category', compact('category', 'products'));
     }
 }
