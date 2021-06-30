@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="address" placeholder="Адрес доставки"
-                   value="{{ old('address') ?? $currentProfile->adress ?? '' }}">
+                   value="{{ old('address') ?? $currentProfile->address ?? '' }}">
             {{--            required maxlength="255" value="{{ old('address') ?? '' }}">--}}
         </div>
         <div class="form-group">
