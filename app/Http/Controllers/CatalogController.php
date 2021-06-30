@@ -53,7 +53,8 @@ class CatalogController extends Controller {
                     $avg = $products[$half]['price'];
                 } else {
                     // четное количество, надо найти такую цену, которая поделит товары пополам
-                    $avg = 0.5 * ($products[$half + 1]['price'] + $products[$half]['price']);
+                    // +1 поменял на -1, потому что нумерация начинается с 0
+                    $avg = 0.5 * ($products[$half - 1]['price'] + $products[$half]['price']);
                 }
                 if ($request->price == 'min') {
                     $builder->where('price', '<=', $avg);
@@ -61,6 +62,7 @@ class CatalogController extends Controller {
                     $builder->where('price', '>=', $avg);
                 }
             }
+//            dd($half, $avg, $products[$half]['price']);
         }
         // отбираем только новинки
         if ($request->has('new')) {
