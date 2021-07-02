@@ -71,6 +71,10 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
             ],
         ],
+        'maillog' => [
+            'driver' => 'single',
+            'path' => storage_path('mails/laravel.log'),
+        ],
 
         'stderr' => [
             'driver' => 'monolog',

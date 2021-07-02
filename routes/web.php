@@ -139,6 +139,10 @@ Route::group([
         ->name('page.remove.image');
 });
 
+Route::get('/feedback', 'FeedbackController@index')->name('feedback.index');
+Route::post('/feedback', 'FeedbackController@send')->name('feedback.send');
+
+
 
 /*
 |--------------------------------------------------------------------------
