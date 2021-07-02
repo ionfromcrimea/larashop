@@ -8,7 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class FeedbackMailer extends Mailable {
+class FeedbackMailer extends Mailable
+{
 
     use Queueable, SerializesModels;
 
@@ -19,7 +20,8 @@ class FeedbackMailer extends Mailable {
      *
      * @return void
      */
-    public function __construct(stdClass $data) {
+    public function __construct(stdClass $data)
+    {
         $this->data = $data;
     }
 
@@ -28,9 +30,21 @@ class FeedbackMailer extends Mailable {
      *
      * @return $this
      */
-    public function build() {
+    public function build()
+    {
+//        if ($this->data->image) {
+//            $this->attachData($this->data->image, 'image.'.$this->data->ext);
+//        }
+        if ($this->data->image) {
+            $this->attachFromStorageDisk('local', $this->data->image);
+        }
         return $this->from('Larashopion@ion.com', 'name Имя 12345')
             ->subject('New Form Форма')
-            ->view('email.feedback', ['data' => $this->data]);
+            ->view('email.feedback', ['data' => $this->data])
+            ->withSwiftMessage(function ($message) {
+                $message->getHeaders()->addTextHeader('Custom-Header', 'HeaderValue');
+            });
+//        $this->subject('Форма обратной связи')
+//            ->view('email.feedback', compact('this->data'));
     }
 }

@@ -16,7 +16,7 @@
 {{--            </ul>--}}
 {{--        </div>--}}
 {{--    @endif--}}
-    <form method="post" action="{{ route('feedback.send') }}">
+    <form method="post" action="{{ route('feedback.send') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Имя, фамилия"
@@ -29,6 +29,9 @@
         <div class="form-group">
         <textarea class="form-control" name="message" placeholder="Ваше сообщение"
                   required maxlength="500" rows="3">{{ old('message') ?? '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Отправить</button>
