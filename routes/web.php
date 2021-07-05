@@ -31,6 +31,9 @@ Route::group([
     // страница товара каталога
     Route::get('product/{product:slug}', 'CatalogController@product')
         ->name('product');
+    // страница результатов поиска
+    Route::get('search', 'CatalogController@search')
+        ->name('search');
 });
 
 /*

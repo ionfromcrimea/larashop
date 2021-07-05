@@ -61,12 +61,18 @@
             </ul>
 
             <!-- Этот блок расположен посередине -->
-            <form class=" form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search"
+{{--            <form class=" form-inline my-2 my-lg-0">--}}
+{{--                <input class="form-control mr-sm-2" type="search"--}}
+{{--                       placeholder="Поиск по каталогу" aria-label="Search">--}}
+{{--                <button class="btn btn-outline-info my-2 my-sm-0"--}}
+{{--                        type="submit">Искать--}}
+{{--                </button>--}}
+{{--            </form>--}}
+            <form action="{{ route('catalog.search') }}" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="query"
                        placeholder="Поиск по каталогу" aria-label="Search">
-                <button class="btn btn-outline-info my-2 my-sm-0"
-                        type="submit">Искать
-                </button>
+                <button class="btn btn-outline-light my-2 my-sm-0"
+                        type="submit">Поиск</button>
             </form>
 
             <!-- Этот блок расположен справа -->

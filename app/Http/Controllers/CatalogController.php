@@ -103,4 +103,11 @@ class CatalogController extends Controller {
 
         return view('catalog.category', compact('category', 'products'));
     }
+
+    public function search(Request $request) {
+        $search = $request->input('query');
+        $query = Product::search($search);
+        $products = $query->paginate(6)->withQueryString();
+        return view('catalog.search', compact('products', 'search'));
+    }
 }
