@@ -32,19 +32,19 @@
             <!-- Этот блок расположен слева -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Заказы</a>
+                    <a class="nav-link" href="{{ route('admin.order.index') }}">Заказы</a>
+                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="#">Каталог</a>--}}
+{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.category.index') }}">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Каталог</a>
+                    <a class="nav-link" href="{{ route('admin.brand.index') }}">Бренды</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Категории</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Бренды</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Товары</a>
+                    <a class="nav-link" href="{{ route('admin.product.index') }}">Товары</a>
                 </li>
             </ul>
 
