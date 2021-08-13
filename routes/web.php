@@ -83,7 +83,7 @@ Route::group([
  * Регистрация, вход в ЛК, восстановление пароля
  */
 Route::name('user.')->prefix('user')->group(function () {
-    Auth::routes();
+    Auth::routes((['verify' => true]));
 });
 
 /*
@@ -191,17 +191,17 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
 
 //Auth::routes();
-Route::name('user.')->prefix('user')->group(function () {
+//Route::name('user.')->prefix('user')->group(function () {
 //    Route::get('index', 'UserController@index')->name('index');
-    Auth::routes();
-});
+    Auth::routes((['verify' => true]));
+//});
 Route::group([
     'as' => 'user.', // имя маршрута, например user.index
     'prefix' => 'user', // префикс маршрута, например user/index
     'middleware' => ['auth'] // один или несколько посредников
 ], function () {
     // главная страница личного кабинета пользователя
-    Route::get('index', 'UserController@index')->name('index');
+    Route::get('index', 'UserController@index')->name('index')->middleware('verified');
     // CRUD-операции над профилями пользователя
     Route::resource('profile', 'ProfileController');
     // просмотр списка заказов в личном кабинете
